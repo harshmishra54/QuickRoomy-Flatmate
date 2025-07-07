@@ -4,13 +4,14 @@ const auth = require('../middleware/authMiddleware');
 const {
   fileComplaint,
   getComplaints,
-  resolveComplaint
+  resolveComplaint,
+  getTrendingComplaint
 } = require('../controllers/complaintController');
 
 router.post('/', auth, fileComplaint);
 router.get('/', auth, getComplaints);
 router.put('/:id/resolve', auth, resolveComplaint);
-router.get('/trending', authMiddleware, getTrendingComplaint);
+router.get('/trending', auth, getTrendingComplaint);
 
 
 module.exports = router;

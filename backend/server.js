@@ -13,6 +13,7 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/complaints', require('./routes/complaintRoutes'));
 app.use('/api/votes', require('./routes/voteRoutes'));
 app.use('/api/stats', require('./routes/statsRoutes'));
+
 app.get('/', (req, res) => {
   res.send('QuirkyRoomie backend is running ✅');
 });

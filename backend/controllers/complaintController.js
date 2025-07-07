@@ -1,7 +1,8 @@
 const Complaint = require('../models/Complaint');
 const User = require('../models/User');
 
-exports.fileComplaint = async (req, res) => {
+// 📌 File a new complaint
+const fileComplaint = async (req, res) => {
   try {
     const { title, description, type, severity } = req.body;
 
@@ -11,24 +12,24 @@ exports.fileComplaint = async (req, res) => {
       type,
       severity,
       createdBy: req.user._id,
-      flatCode: req.user.flatCode
+      flatCode: req.user.flatCode,
     });
 
     await complaint.save();
 
-    // Link to user
     await User.findByIdAndUpdate(req.user._id, {
-      $push: { complaintsFiled: complaint._id }
+      $push: { complaintsFiled: complaint._id },
     });
 
     res.status(201).json(complaint);
   } catch (err) {
-    console.error(err); 
+    console.error(err);
     res.status(500).json({ message: 'Failed to file complaint' });
   }
 };
 
-exports.getComplaints = async (req, res) => {
+// 📌 Get all complaints in the user's flat
+const getComplaints = async (req, res) => {
   try {
     const complaints = await Complaint.find({ flatCode: req.user.flatCode })
       .populate('createdBy', 'name email')
@@ -40,7 +41,8 @@ exports.getComplaints = async (req, res) => {
   }
 };
 
-exports.resolveComplaint = async (req, res) => {
+// 📌 Resolve a complaint and reward karma
+const resolveComplaint = async (req, res) => {
   try {
     const complaint = await Complaint.findById(req.params.id);
 
@@ -49,7 +51,6 @@ exports.resolveComplaint = async (req, res) => {
     complaint.resolved = true;
     await complaint.save();
 
-    // Reward karma to resolver
     await User.findByIdAndUpdate(req.user._id, { $inc: { karma: 10 } });
 
     res.json({ message: 'Complaint resolved', complaint });
@@ -57,24 +58,31 @@ exports.resolveComplaint = async (req, res) => {
     res.status(500).json({ message: 'Error resolving complaint' });
   }
 };
-export const getTrendingComplaint = async (req, res) => {
+
+// 📌 Get the trending (most upvoted) complaint(s)
+const getTrendingComplaint = async (req, res) => {
   try {
-    const user = await User.findById(req.userId);
+    const user = await User.findById(req.user._id);
     const flatCode = user.flatCode;
 
-    // Find complaints in the same flat
     const complaints = await Complaint.find({ flatCode });
 
     if (!complaints.length) {
       return res.status(200).json({ message: 'No complaints found in your flat.' });
     }
 
-    // Sort complaints by upvote count descending
-    const sorted = complaints.sort((a, b) => b.upvotes.length - a.upvotes.length);
-    const topVotes = sorted[0].upvotes.length;
+    // Sort by number of UPVOTES
+    const sorted = complaints.sort((a, b) => {
+      const aUpvotes = (a.votes || []).filter(v => v.voteType === 'upvote').length;
+      const bUpvotes = (b.votes || []).filter(v => v.voteType === 'upvote').length;
+      return bUpvotes - aUpvotes;
+    });
 
-    // Get all complaints that match top vote count (in case of tie)
-    const trending = sorted.filter(c => c.upvotes.length === topVotes && topVotes > 0);
+    const topVotes = (sorted[0].votes || []).filter(v => v.voteType === 'upvote').length;
+
+    const trending = sorted.filter(
+      c => (c.votes || []).filter(v => v.voteType === 'upvote').length === topVotes && topVotes > 0
+    );
 
     res.status(200).json({
       message: 'Trending complaint(s) in your flat',
@@ -84,4 +92,12 @@ export const getTrendingComplaint = async (req, res) => {
     console.error('Error in trending complaint:', error);
     res.status(500).json({ message: 'Failed to fetch trending complaint' });
   }
+};
+
+// 📦 Export all controllers
+module.exports = {
+  fileComplaint,
+  getComplaints,
+  resolveComplaint,
+  getTrendingComplaint
 };

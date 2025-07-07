@@ -63,38 +63,48 @@ const getTrendingComplaint = async (req, res) => {
     const user = await User.findById(req.user._id);
     const flatCode = user.flatCode;
 
+    // Get all complaints in the same flat
     const complaints = await Complaint.find({ flatCode });
 
     if (!complaints.length) {
-      return res.status(200).json({ message: 'No complaints found in your flat.' });
+      return res.status(200).json({
+        message: 'No complaints found in your flat.',
+        complaints: [],
+      });
     }
 
-    // Log one complaint for debugging
-    console.log("Sample complaint:", complaints[0]);
-
-    // Guard against votes not being an array
+    // Sort complaints by number of upvotes
     const sorted = complaints.sort((a, b) => {
-      const aVotes = Array.isArray(a.votes) ? a.votes : [];
-      const bVotes = Array.isArray(b.votes) ? b.votes : [];
-
-      const aUpvotes = aVotes.filter(v => v.voteType === 'upvote').length;
-      const bUpvotes = bVotes.filter(v => v.voteType === 'upvote').length;
-
+      const aUpvotes = Array.isArray(a.votes?.upvotes) ? a.votes.upvotes.length : 0;
+      const bUpvotes = Array.isArray(b.votes?.upvotes) ? b.votes.upvotes.length : 0;
       return bUpvotes - aUpvotes;
     });
 
-    const topVotes = Array.isArray(sorted[0].votes)
-      ? sorted[0].votes.filter(v => v.voteType === 'upvote').length
+    // Highest vote count
+    const topVotes = Array.isArray(sorted[0].votes?.upvotes)
+      ? sorted[0].votes.upvotes.length
       : 0;
 
+    // Log for verification
+    console.log("Top votes:", topVotes);
+
+    // If no upvotes at all
+    if (topVotes === 0) {
+      return res.status(200).json({
+        message: 'No trending complaints with upvotes yet.',
+        complaints: [],
+      });
+    }
+
+    // Select all with top vote count
     const trending = sorted.filter(c => {
-      const voteArr = Array.isArray(c.votes) ? c.votes : [];
-      return voteArr.filter(v => v.voteType === 'upvote').length === topVotes && topVotes > 0;
+      const votes = Array.isArray(c.votes?.upvotes) ? c.votes.upvotes.length : 0;
+      return votes === topVotes;
     });
 
     res.status(200).json({
       message: 'Trending complaint(s) in your flat',
-      complaints: trending
+      complaints: trending,
     });
   } catch (error) {
     console.error('Error in trending complaint:', error);

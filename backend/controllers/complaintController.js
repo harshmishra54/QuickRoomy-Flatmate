@@ -58,8 +58,6 @@ const resolveComplaint = async (req, res) => {
     res.status(500).json({ message: 'Error resolving complaint' });
   }
 };
-
-// 📌 Get the trending (most upvoted) complaint(s)
 const getTrendingComplaint = async (req, res) => {
   try {
     const user = await User.findById(req.user._id);
@@ -71,18 +69,28 @@ const getTrendingComplaint = async (req, res) => {
       return res.status(200).json({ message: 'No complaints found in your flat.' });
     }
 
-    // Sort by number of UPVOTES
+    // Log one complaint for debugging
+    console.log("Sample complaint:", complaints[0]);
+
+    // Guard against votes not being an array
     const sorted = complaints.sort((a, b) => {
-      const aUpvotes = (a.votes || []).filter(v => v.voteType === 'upvote').length;
-      const bUpvotes = (b.votes || []).filter(v => v.voteType === 'upvote').length;
+      const aVotes = Array.isArray(a.votes) ? a.votes : [];
+      const bVotes = Array.isArray(b.votes) ? b.votes : [];
+
+      const aUpvotes = aVotes.filter(v => v.voteType === 'upvote').length;
+      const bUpvotes = bVotes.filter(v => v.voteType === 'upvote').length;
+
       return bUpvotes - aUpvotes;
     });
 
-    const topVotes = (sorted[0].votes || []).filter(v => v.voteType === 'upvote').length;
+    const topVotes = Array.isArray(sorted[0].votes)
+      ? sorted[0].votes.filter(v => v.voteType === 'upvote').length
+      : 0;
 
-    const trending = sorted.filter(
-      c => (c.votes || []).filter(v => v.voteType === 'upvote').length === topVotes && topVotes > 0
-    );
+    const trending = sorted.filter(c => {
+      const voteArr = Array.isArray(c.votes) ? c.votes : [];
+      return voteArr.filter(v => v.voteType === 'upvote').length === topVotes && topVotes > 0;
+    });
 
     res.status(200).json({
       message: 'Trending complaint(s) in your flat',

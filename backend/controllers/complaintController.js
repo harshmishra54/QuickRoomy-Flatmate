@@ -57,3 +57,31 @@ exports.resolveComplaint = async (req, res) => {
     res.status(500).json({ message: 'Error resolving complaint' });
   }
 };
+export const getTrendingComplaint = async (req, res) => {
+  try {
+    const user = await User.findById(req.userId);
+    const flatCode = user.flatCode;
+
+    // Find complaints in the same flat
+    const complaints = await Complaint.find({ flatCode });
+
+    if (!complaints.length) {
+      return res.status(200).json({ message: 'No complaints found in your flat.' });
+    }
+
+    // Sort complaints by upvote count descending
+    const sorted = complaints.sort((a, b) => b.upvotes.length - a.upvotes.length);
+    const topVotes = sorted[0].upvotes.length;
+
+    // Get all complaints that match top vote count (in case of tie)
+    const trending = sorted.filter(c => c.upvotes.length === topVotes && topVotes > 0);
+
+    res.status(200).json({
+      message: 'Trending complaint(s) in your flat',
+      complaints: trending
+    });
+  } catch (error) {
+    console.error('Error in trending complaint:', error);
+    res.status(500).json({ message: 'Failed to fetch trending complaint' });
+  }
+};

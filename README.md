@@ -70,7 +70,7 @@ cd backend
 npm install
 Create a .env file:
 
-ini
+npm init -y
 Copy
 Edit
 PORT=5000

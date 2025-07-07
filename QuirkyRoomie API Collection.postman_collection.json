@@ -1,0 +1,959 @@
+ 
+{
+	"info": {
+		"_postman_id": "4c84511e-9a56-4de3-bf0e-898777e66a4f",
+		"name": "QuirkyRoomie API Collection",
+		"description": "API test suite for QuirkyRoomie MERN Full Stack App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39083207"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"John\",\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\",\n  \"flatCode\": \"FLAT123\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Register User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John\",\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\",\n  \"flatCode\": \"FLAT123\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "291"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"123-1JL9FtXuSH8nSjA9doxxSFtPYRY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:24:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODZiZDg5MjFhODliZTc2YjViMzA3NzMiLCJpYXQiOjE3NTE4OTgyNTksImV4cCI6MTc1MTk4NDY1OX0.2BFPhfFwIra6seo6lTK5cdfR5h6gpHCpIjXPfpLMpaQ\",\n    \"user\": {\n        \"id\": \"686bd8921a89be76b5b30773\",\n        \"name\": \"John\",\n        \"email\": \"john@example.com\",\n        \"flatCode\": \"FLAT123\"\n    }\n}"
+				},
+				{
+					"name": "Register User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Test User\",\n  \"email\": \"testuser@example.com\",\n  \"password\": \"123456\",\n  \"flatCode\": \"FLAT123\"\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "300"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12c-Au8SNJKUGdS+jvJLjG538hXgZoA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:38:50 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODZiZGJmYTFhODliZTc2YjViMzA3NzciLCJpYXQiOjE3NTE4OTkxMzAsImV4cCI6MTc1MTk4NTUzMH0.NDXhqLR6FP5YqI7FM96m83TAGv3Itxut1mfkwoPTZ2U\",\n    \"user\": {\n        \"id\": \"686bdbfa1a89be76b5b30777\",\n        \"name\": \"Test User\",\n        \"email\": \"testuser@example.com\",\n        \"flatCode\": \"FLAT123\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Login User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "291"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"123-nM5Fb8+NPRGysEePDLL4AHRcCUw\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:26:55 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODZiZDg5MjFhODliZTc2YjViMzA3NzMiLCJpYXQiOjE3NTE4OTg0MTUsImV4cCI6MTc1MTk4NDgxNX0.Q8UERDbdYdeGsf-OB8QXGFmUMMwrUYJzENGSrxO8LLw\",\n    \"user\": {\n        \"id\": \"686bd8921a89be76b5b30773\",\n        \"name\": \"John\",\n        \"email\": \"john@example.com\",\n        \"flatCode\": \"FLAT123\"\n    }\n}"
+				},
+				{
+					"name": "Login User",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"testuser@example.com\",\n  \"password\": \"123456\"\n}\n"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "300"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"12c-sMedwUEvinHUvvBrFsyyRoWCiII\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:39:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODZiZGJmYTFhODliZTc2YjViMzA3NzciLCJpYXQiOjE3NTE4OTkxNzQsImV4cCI6MTc1MTk4NTU3NH0.qZX4Jc5Np9JW_gnUpF0TkleKZNd7OBz33FGZCqY-ckU\",\n    \"user\": {\n        \"id\": \"686bdbfa1a89be76b5b30777\",\n        \"name\": \"Test User\",\n        \"email\": \"testuser@example.com\",\n        \"flatCode\": \"FLAT123\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All Complaints",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/complaints",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"complaints"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get All Complaints",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODZiZDg5MjFhODliZTc2YjViMzA3NzMiLCJpYXQiOjE3NTE4OTgyNTksImV4cCI6MTc1MTk4NDY1OX0.2BFPhfFwIra6seo6lTK5cdfR5h6gpHCpIjXPfpLMpaQ}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"Leaking pipe\",\r\n  \"description\": \"There's a pipe leaking in the kitchen.\",\r\n  \"type\": \"Maintenance\",\r\n  \"severity\": \"Major\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/complaints",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"complaints"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "2"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"2-l9Fw4VUO7kr8CvBlt4zaMCqXZ0w\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:39:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "[]"
+				}
+			]
+		},
+		{
+			"name": "Create Complaint",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"title\": \"Leaking pipe\",\n  \"description\": \"Kitchen pipe leaking since yesterday\",\n  \"type\": \"Maintenance\",\n  \"severity\": \"Major\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/complaints",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"complaints"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Create Complaint",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Leaking pipe\",\n  \"description\": \"Kitchen pipe leaking since yesterday\",\n  \"type\": \"Bills\",\n  \"severity\": \"Major\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/complaints",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"complaints"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "306"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"132-PykP/I4PJ2iK1Ff1MnD/LAbt6BY\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:49:34 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"title\": \"Leaking pipe\",\n    \"description\": \"Kitchen pipe leaking since yesterday\",\n    \"type\": \"Bills\",\n    \"severity\": \"Major\",\n    \"createdBy\": \"686bd8921a89be76b5b30773\",\n    \"flatCode\": \"FLAT123\",\n    \"votes\": {\n        \"upvotes\": [],\n        \"downvotes\": []\n    },\n    \"resolved\": false,\n    \"_id\": \"686bde7e278d7a9bcd5b31d7\",\n    \"createdAt\": \"2025-07-07T14:49:34.830Z\",\n    \"__v\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Resolve Complaint",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/complaints/{{complaintId}}/resolve",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"complaints",
+						"{{complaintId}}",
+						"resolve"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Resolve Complaint",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/complaints/{{complaintId}}/resolve",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"complaints",
+								"{{complaintId}}",
+								"resolve"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "350"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"15e-ofZlnG+POUKiEEif1EjXrErFPwM\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:51:09 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Complaint resolved\",\n    \"complaint\": {\n        \"votes\": {\n            \"upvotes\": [],\n            \"downvotes\": []\n        },\n        \"_id\": \"686bde7e278d7a9bcd5b31d7\",\n        \"title\": \"Leaking pipe\",\n        \"description\": \"Kitchen pipe leaking since yesterday\",\n        \"type\": \"Bills\",\n        \"severity\": \"Major\",\n        \"createdBy\": \"686bd8921a89be76b5b30773\",\n        \"flatCode\": \"FLAT123\",\n        \"resolved\": true,\n        \"createdAt\": \"2025-07-07T14:49:34.830Z\",\n        \"__v\": 0\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Vote on Complaint",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"voteType\": \"upvote\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/votes/{{complaintId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"votes",
+						"{{complaintId}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Vote on Complaint",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"voteType\": \"upvote\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/votes/{{complaintId}}",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"votes",
+								"{{complaintId}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "389"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"185-6DaojE9vAAmTbwuZC94DZ5uIHTI\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:52:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Vote recorded\",\n    \"complaint\": {\n        \"votes\": {\n            \"upvotes\": [\n                \"686bdbfa1a89be76b5b30777\"\n            ],\n            \"downvotes\": []\n        },\n        \"_id\": \"686bde7e278d7a9bcd5b31d7\",\n        \"title\": \"Leaking pipe\",\n        \"description\": \"Kitchen pipe leaking since yesterday\",\n        \"type\": \"Bills\",\n        \"severity\": \"Major\",\n        \"createdBy\": \"686bd8921a89be76b5b30773\",\n        \"flatCode\": \"FLAT123\",\n        \"resolved\": true,\n        \"createdAt\": \"2025-07-07T14:49:34.830Z\",\n        \"__v\": 1\n    },\n    \"punishment\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Leaderboard (Top Flatmates)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/stats/leaderboard",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"stats",
+						"leaderboard"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Leaderboard (Top Flatmates)",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/stats/leaderboard",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"stats",
+								"leaderboard"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "142"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"8e-OZvuEeIVsaoCWkPf6K2aIbgH/uE\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:52:52 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"topFlatmates\": [\n        {\n            \"_id\": \"686bdbfa1a89be76b5b30777\",\n            \"name\": \"Test User\",\n            \"karma\": 10\n        },\n        {\n            \"_id\": \"686bd8921a89be76b5b30773\",\n            \"name\": \"John\",\n            \"karma\": 0\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Flat Statistics",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:5000/api/stats/flat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"stats",
+						"flat"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Flat Statistics",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:5000/api/stats/flat",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"stats",
+								"flat"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Powered-By",
+							"value": "Express"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "483"
+						},
+						{
+							"key": "ETag",
+							"value": "W/\"1e3-O+3DuQ8wh3JNiksxpVPo4XbOFSA\""
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 07 Jul 2025 14:53:17 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=5"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"problemOfWeek\": {\n        \"votes\": {\n            \"upvotes\": [\n                \"686bdbfa1a89be76b5b30777\"\n            ],\n            \"downvotes\": []\n        },\n        \"_id\": \"686bde7e278d7a9bcd5b31d7\",\n        \"title\": \"Leaking pipe\",\n        \"description\": \"Kitchen pipe leaking since yesterday\",\n        \"type\": \"Bills\",\n        \"severity\": \"Major\",\n        \"createdBy\": \"686bd8921a89be76b5b30773\",\n        \"flatCode\": \"FLAT123\",\n        \"resolved\": true,\n        \"createdAt\": \"2025-07-07T14:49:34.830Z\",\n        \"__v\": 1\n    },\n    \"complaintStats\": {\n        \"Bills\": 1\n    },\n    \"topOffender\": {\n        \"_id\": \"686bd8921a89be76b5b30773\",\n        \"name\": \"John\",\n        \"email\": \"john@example.com\",\n        \"complaints\": 1\n    }\n}"
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		},
+		{
+			"key": "complaintId",
+			"value": ""
+		}
+	]
+}

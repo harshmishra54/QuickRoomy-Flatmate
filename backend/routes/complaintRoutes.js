@@ -10,5 +10,7 @@ const {
 router.post('/', auth, fileComplaint);
 router.get('/', auth, getComplaints);
 router.put('/:id/resolve', auth, resolveComplaint);
+router.get('/trending', authMiddleware, getTrendingComplaint);
+
 
 module.exports = router;

@@ -11,12 +11,19 @@ const Navbar = () => {
     navigate('/login');
   };
 
+  // 🔧 Collapse navbar manually
+  const closeNavbar = () => {
+    const navbar = document.getElementById('navbarContent');
+    if (navbar && navbar.classList.contains('show')) {
+      new bootstrap.Collapse(navbar).hide();
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-4">
       <div className="container-fluid">
         <Link className="navbar-brand fw-bold text-white" to="/">QuirkyRoomie</Link>
 
-        {/* Toggler button for mobile */}
         <button
           className="navbar-toggler"
           type="button"
@@ -29,18 +36,17 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Collapsible navbar content */}
         <div className="collapse navbar-collapse" id="navbarContent">
           {user && (
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link className="nav-link" to="/">Dashboard</Link>
+                <Link className="nav-link" to="/" onClick={closeNavbar}>Dashboard</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/complaints">Complaints</Link>
+                <Link className="nav-link" to="/complaints" onClick={closeNavbar}>Complaints</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" to="/leaderboard">Leaderboard</Link>
+                <Link className="nav-link" to="/leaderboard" onClick={closeNavbar}>Leaderboard</Link>
               </li>
             </ul>
           )}
@@ -52,16 +58,16 @@ const Navbar = () => {
                   Hi, {user.name}
                 </li>
                 <li className="nav-item">
-                  <button className="btn btn-outline-light btn-sm" onClick={handleLogout}>Logout</button>
+                  <button className="btn btn-outline-light btn-sm" onClick={() => { handleLogout(); closeNavbar(); }}>Logout</button>
                 </li>
               </>
             ) : (
               <>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/login">Login</Link>
+                  <Link className="nav-link" to="/login" onClick={closeNavbar}>Login</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/register">Register</Link>
+                  <Link className="nav-link" to="/register" onClick={closeNavbar}>Register</Link>
                 </li>
               </>
             )}

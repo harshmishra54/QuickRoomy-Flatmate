@@ -22,15 +22,21 @@ const Dashboard = () => {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/complaints/trending`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("Trending API response:", res.data); // ✅ Debug log
-        setTrending(res.data.complaints || []);
+        console.log("🎯 Trending API response:", res.data);
+        if (Array.isArray(res.data.complaints)) {
+          setTrending(res.data.complaints);
+        } else {
+          setTrending([]);
+        }
       } catch (err) {
-        console.error('Failed to fetch trending complaint', err);
+        console.error('❌ Failed to fetch trending complaint:', err);
+        setTrending([]);
       } finally {
         setLoading(false);
       }
     };
-    fetchTrending();
+
+    if (token) fetchTrending();
   }, [token]);
 
   return (
@@ -54,22 +60,22 @@ const Dashboard = () => {
 
         {/* 🔥 Trending Complaints */}
         <div className="col-12">
-          {loading ? (
-            <p className="text-center">Loading trending complaints...</p>
-          ) : trending.length > 0 ? (
-            trending.map((c, i) => (
-              <div key={i} className="card bg-warning-subtle shadow mb-3 p-3">
-                <h4 className="text-danger">🔥 Flatmate Problem of the Week</h4>
-                <p className="mb-1"><strong>{c.title}</strong></p>
-                <p className="mb-1">{c.description}</p>
-                <small className="text-muted">Severity: {c.severity}</small>
-              </div>
-            ))
-          ) : (
-            <div className="card shadow-sm p-3 bg-light text-center">
-              <p className="text-muted mb-0">No trending complaint this week yet 😇</p>
-            </div>
-          )}
+          <div className="card shadow p-3">
+            <h4 className="text-danger">🔥 Flatmate Problem of the Week</h4>
+            {loading ? (
+              <p>Loading...</p>
+            ) : trending.length > 0 ? (
+              trending.map((c, idx) => (
+                <div key={idx} className="mb-3 p-3 border rounded bg-warning-subtle">
+                  <h5>{c.title}</h5>
+                  <p>{c.description}</p>
+                  <small>Severity: {c.severity}</small>
+                </div>
+              ))
+            ) : (
+              <p className="text-muted mb-0">No trending complaint this week 😇</p>
+            )}
+          </div>
         </div>
 
         {/* Quick Navigation Cards */}

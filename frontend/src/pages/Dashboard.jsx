@@ -6,6 +6,7 @@ const Dashboard = () => {
   const { user, token } = useAuth();
   const [showPunishment, setShowPunishment] = useState(false);
   const [trending, setTrending] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const wasPunished = localStorage.getItem('justPunished');
@@ -21,11 +22,12 @@ const Dashboard = () => {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/complaints/trending`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        if (Array.isArray(res.data.complaints)) {
-          setTrending(res.data.complaints); // ✅ Store full array
-        }
+        console.log("Trending API result:", res.data.complaints);
+        setTrending(res.data.complaints || []);
       } catch (err) {
         console.error('Failed to fetch trending complaint', err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchTrending();
@@ -51,16 +53,26 @@ const Dashboard = () => {
         </div>
 
         {/* 🔥 Trending Complaints */}
-        {trending.length > 0 && trending.map((c, index) => (
-          <div className="col-12" key={index}>
-            <div className="card bg-warning-subtle shadow p-3">
-              <h4 className="text-danger">🔥 Flatmate Problem of the Week</h4>
-              <p className="mb-1"><strong>{c.title}</strong></p>
-              <p className="mb-1">{c.description}</p>
-              <small className="text-muted">Severity: {c.severity}</small>
-            </div>
+        {loading ? (
+          <div className="col-12 text-center">
+            <p>Loading trending complaints...</p>
           </div>
-        ))}
+        ) : trending.length > 0 ? (
+          trending.map((c, idx) => (
+            <div className="col-12" key={idx}>
+              <div className="card bg-warning-subtle shadow p-3">
+                <h4 className="text-danger">🔥 Flatmate Problem of the Week</h4>
+                <p className="mb-1"><strong>{c.title}</strong></p>
+                <p className="mb-1">{c.description}</p>
+                <small className="text-muted">Severity: {c.severity}</small>
+              </div>
+            </div>
+          ))
+        ) : (
+          <div className="col-12 text-center text-muted">
+            <p>No trending complaint this week yet 😇</p>
+          </div>
+        )}
 
         {/* Quick Navigation Cards */}
         <div className="col-md-6">

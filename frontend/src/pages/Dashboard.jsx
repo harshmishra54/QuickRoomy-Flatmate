@@ -22,7 +22,7 @@ const Dashboard = () => {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/complaints/trending`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        console.log("Trending API result:", res.data.complaints);
+        console.log("Trending API response:", res.data); // ✅ Debug log
         setTrending(res.data.complaints || []);
       } catch (err) {
         console.error('Failed to fetch trending complaint', err);
@@ -53,26 +53,24 @@ const Dashboard = () => {
         </div>
 
         {/* 🔥 Trending Complaints */}
-        {loading ? (
-          <div className="col-12 text-center">
-            <p>Loading trending complaints...</p>
-          </div>
-        ) : trending.length > 0 ? (
-          trending.map((c, idx) => (
-            <div className="col-12" key={idx}>
-              <div className="card bg-warning-subtle shadow p-3">
+        <div className="col-12">
+          {loading ? (
+            <p className="text-center">Loading trending complaints...</p>
+          ) : trending.length > 0 ? (
+            trending.map((c, i) => (
+              <div key={i} className="card bg-warning-subtle shadow mb-3 p-3">
                 <h4 className="text-danger">🔥 Flatmate Problem of the Week</h4>
                 <p className="mb-1"><strong>{c.title}</strong></p>
                 <p className="mb-1">{c.description}</p>
                 <small className="text-muted">Severity: {c.severity}</small>
               </div>
+            ))
+          ) : (
+            <div className="card shadow-sm p-3 bg-light text-center">
+              <p className="text-muted mb-0">No trending complaint this week yet 😇</p>
             </div>
-          ))
-        ) : (
-          <div className="col-12 text-center text-muted">
-            <p>No trending complaint this week yet 😇</p>
-          </div>
-        )}
+          )}
+        </div>
 
         {/* Quick Navigation Cards */}
         <div className="col-md-6">

@@ -5,7 +5,7 @@ import { useAuth } from '../context/AuthContext';
 const Dashboard = () => {
   const { user, token } = useAuth();
   const [showPunishment, setShowPunishment] = useState(false);
-  const [trending, setTrending] = useState(null);
+  const [trending, setTrending] = useState([]);
 
   useEffect(() => {
     const wasPunished = localStorage.getItem('justPunished');
@@ -21,8 +21,8 @@ const Dashboard = () => {
         const res = await axios.get(`${import.meta.env.VITE_API_URL}/complaints/trending`, {
           headers: { Authorization: `Bearer ${token}` },
         });
-        if (res.data.complaints?.length > 0) {
-          setTrending(res.data.complaints[0]); // Use top-voted one
+        if (Array.isArray(res.data.complaints)) {
+          setTrending(res.data.complaints); // ✅ Store full array
         }
       } catch (err) {
         console.error('Failed to fetch trending complaint', err);
@@ -50,17 +50,17 @@ const Dashboard = () => {
           </div>
         </div>
 
-        {/* 🔥 Trending Complaint */}
-        {trending && (
-          <div className="col-12">
+        {/* 🔥 Trending Complaints */}
+        {trending.length > 0 && trending.map((c, index) => (
+          <div className="col-12" key={index}>
             <div className="card bg-warning-subtle shadow p-3">
               <h4 className="text-danger">🔥 Flatmate Problem of the Week</h4>
-              <p className="mb-1"><strong>{trending.title}</strong></p>
-              <p className="mb-1">{trending.description}</p>
-              <small className="text-muted">Severity: {trending.severity}</small>
+              <p className="mb-1"><strong>{c.title}</strong></p>
+              <p className="mb-1">{c.description}</p>
+              <small className="text-muted">Severity: {c.severity}</small>
             </div>
           </div>
-        )}
+        ))}
 
         {/* Quick Navigation Cards */}
         <div className="col-md-6">
